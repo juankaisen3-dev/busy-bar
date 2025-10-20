@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/css/output.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Tailwind style DANIEL_Tech</title>
+</head>
+<body class="relative min-h-screen bg-black overflow-x-hidden">
+    <!-- Vidéo de fond -->
+    <video src="src/assets/images/welcome.mp4" autoplay muted loop
+        class="fixed top-0 left-0 w-full h-full object-cover -z-10"></video>
+
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="flex justify-between items-center pt-5 px-4 md:px-0 container mx-auto">
+            <h1 class="text-xl font-bold text-gray-400 drop-shadow">DANIEL_Tech</h1>
+            <nav>
+                <ul class="flex gap-5 text-gray-500">
+                    <li>BUSY bar</li>
+                    <li><a href="#" class="underline">Boutique</a></li>
+                    <li><a href="#" class="underline">Téléchargement</a></li>
+                    <li><a href="#" class="underline">Blog</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="flex-1 flex flex-col justify-center items-center text-center px-4">
+            <h2 class="text-3xl font-semibold mb-4 text-white drop-shadow">Bienvenue sur DANIEL_Tech !</h2>
+            <p class="mb-8 text-gray-300">Explore notre boutique, télécharge nos ressources ou lis notre blog.</p>
+            <a href="#" class="px-6 py-2 bg-blue-600 rounded text-white float-right hover:bg-blue-700 transition mb-8">Découvrir</a>
+        </main>
+
+        <!-- Définition BUSY bar + Outils électroniques (collés et centrés) -->
+        <section class="w-full flex flex-col items-center mb-6">
+            <!-- Définition BUSY bar -->
+            <div class="bg-black/70 rounded-xl px-8 py-4 text-center text-white max-w-xl shadow-lg mb-4">
+                <div class="flex justify-center mb-2">
+                    <!-- Icône Heroicons (exemple) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 4h1a2 2 0 002-2v-4a2 2 0 00-2-2h-1m-4 4H7a2 2 0 01-2-2V7a2 2 0 012-2h1" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-1">BUSY bar</h3>
+                <p class="text-sm">La BUSY bar est un espace innovant dédié à la découverte, l’échange et l’expérimentation autour des nouvelles technologies et outils électroniques. Venez partager, apprendre, et créer ensemble !</p>
+            </div>
+            <!-- Outils électroniques -->
+            <div class="bg-black/70 rounded-xl px-6 py-6 text-white max-w-4xl shadow-lg w-full flex flex-col items-center">
+                <h2 class="text-xl font-semibold mb-6">Outils électroniques à découvrir</h2>
+                <div class="flex flex-col md:flex-row gap-8 w-full justify-center items-center">
+                    <!-- Outil 1 : Multimètre numérique -->
+                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-5a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="font-bold text-lg mb-2">Multimètre numérique</h3>
+                        <p class="text-sm">Mesurez la tension, le courant et la résistance de vos circuits en toute simplicité.</p>
+                    </div>
+                    <!-- Outil 2 : Fer à souder -->
+                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6 6M7.5 10.5l6 6m-6-6l6 6m-6-6L6 12.5m.5-2.5l-2-2m0 0a2.828 2.828 0 014 4l-2-2z" />
+                        </svg>
+                        <h3 class="font-bold text-lg mb-2">Fer à souder</h3>
+                        <p class="text-sm">Assemblez ou réparez vos composants électroniques avec précision et sécurité.</p>
+                    </div>
+                    <!-- Outil 3 : Oscilloscope portable -->
+                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4V9a4 4 0 00-4-4H7a4 4 0 00-4 4v6z" />
+                        </svg>
+                        <h3 class="font-bold text-lg mb-2">Oscilloscope portable</h3>
+                        <p class="text-sm">Visualisez les signaux électriques et analysez vos montages en temps réel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer toujours en bas -->
+        <footer class="w-full bg-black/60 text-white text-center py-4 mt-auto">
+            © 2025 Daniel_Tech
+        </footer>
+    </div>
+</body>
+</html>

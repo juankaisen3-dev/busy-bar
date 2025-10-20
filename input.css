@@ -1,0 +1,5 @@
+/* stylelint-disable at-rule-no-unknown */
+@import "tailwindcss/preflight";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "tailwindcss";
