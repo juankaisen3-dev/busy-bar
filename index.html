@@ -1,87 +1,601 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="output.css" rel="stylesheet"/>
+    <title>DANIEL_Tech - Boutique Électronique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Tailwind style DANIEL_Tech</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-sidebar {
+            transition: transform 0.3s ease;
+        }
+        
+        .chatbot-container {
+            transition: all 0.3s ease;
+        }
+        
+        .chat-message {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body class="relative min-h-screen bg-black overflow-x-hidden">
     <!-- Vidéo de fond -->
-    <video src="welcome.mp4" autoplay muted loop
-        class="fixed top-0 left-0 w-full h-full object-cover -z-10"></video>
+    <video src="welcome.mp4" autoplay muted loop class="fixed top-0 left-0 w-full h-full object-cover -z-10"></video>
 
     <div class="flex flex-col min-h-screen">
         <!-- Header -->
         <header class="flex justify-between items-center pt-5 px-4 md:px-0 container mx-auto">
-            <h1 class="text-xl font-bold text-gray-400 drop-shadow">DANIEL_Tech</h1>
+            <h1 class="text-xl font-bold text-white drop-shadow">DANIEL_Tech</h1>
             <nav>
-                <ul class="flex gap-5 text-gray-500">
-                    <li>BUSY bar</li>
-                    <li><a href="#" class="underline">Boutique</a></li>
-                    <li><a href="#" class="underline">Téléchargement</a></li>
-                    <li><a href="#" class="underline">Blog</a></li>
+                <ul class="flex gap-5 text-gray-300">
+                    <li><a href="#" class="hover:text-white transition">BUSY bar</a></li>
+                    <li><a href="#boutique" class="hover:text-white transition">Boutique</a></li>
+                    <li><a href="#" class="hover:text-white transition">Téléchargement</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
                 </ul>
             </nav>
+            <div class="flex items-center gap-4">
+                <button id="cart-toggle" class="relative text-white hover:text-blue-400 transition">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button class="text-white hover:text-blue-400 transition">
+                    <i class="fas fa-user text-xl"></i>
+                </button>
+            </div>
         </header>
 
         <!-- Contenu principal -->
-        <main class="flex-1 flex flex-col justify-center items-center text-center px-4">
-            <h2 class="text-3xl font-semibold mb-4 text-white drop-shadow">Bienvenue sur DANIEL_Tech !</h2>
-            <p class="mb-8 text-gray-300">Explore notre boutique, télécharge nos ressources ou lis notre blog.</p>
-            <a href="#" class="px-6 py-2 bg-blue-600 rounded text-white float-right hover:bg-blue-700 transition mb-8">Découvrir</a>
+        <main class="flex-1 flex flex-col justify-center items-center text-center px-4 py-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow">Bienvenue sur DANIEL_Tech !</h2>
+            <p class="mb-8 text-gray-300 text-lg max-w-2xl">Votre destination pour les meilleurs appareils électroniques et outils technologiques. Qualité, innovation et prix compétitifs.</p>
+            <a href="#boutique" class="px-8 py-3 bg-blue-600 rounded-lg text-white font-medium hover:bg-blue-700 transition transform hover:scale-105 mb-8 pulse">Explorer la Boutique</a>
         </main>
 
-        <!-- Définition BUSY bar + Outils électroniques (collés et centrés) -->
-        <section class="w-full flex flex-col items-center mb-6">
-            <!-- Définition BUSY bar -->
-            <div class="bg-black/70 rounded-xl px-8 py-4 text-center text-white max-w-xl shadow-lg mb-4">
-                <div class="flex justify-center mb-2">
-                    <!-- Icône Heroicons (exemple) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 4h1a2 2 0 002-2v-4a2 2 0 00-2-2h-1m-4 4H7a2 2 0 01-2-2V7a2 2 0 012-2h1" />
-                    </svg>
+        <!-- Section BUSY bar -->
+        <section class="w-full flex flex-col items-center mb-12 px-4">
+            <div class="bg-black/80 backdrop-blur-sm rounded-xl px-8 py-6 text-center text-white max-w-4xl shadow-xl border border-gray-800">
+                <div class="flex justify-center mb-4">
+                    <i class="fas fa-microchip text-4xl text-blue-400"></i>
                 </div>
-                <h3 class="text-lg font-bold mb-1">BUSY bar</h3>
-                <p class="text-sm">La BUSY bar est un espace innovant dédié à la découverte, l’échange et l’expérimentation autour des nouvelles technologies et outils électroniques. Venez partager, apprendre, et créer ensemble !</p>
+                <h3 class="text-2xl font-bold mb-3">BUSY bar</h3>
+                <p class="text-gray-300">La BUSY bar est un espace innovant dédié à la découverte, l'échange et l'expérimentation autour des nouvelles technologies et outils électroniques. Venez partager, apprendre, et créer ensemble !</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4">
+                    <span class="bg-blue-900/50 px-3 py-1 rounded-full text-sm">Ateliers pratiques</span>
+                    <span class="bg-blue-900/50 px-3 py-1 rounded-full text-sm">Démonstrations</span>
+                    <span class="bg-blue-900/50 px-3 py-1 rounded-full text-sm">Échanges communautaires</span>
+                </div>
             </div>
-            <!-- Outils électroniques -->
-            <div class="bg-black/70 rounded-xl px-6 py-6 text-white max-w-4xl shadow-lg w-full flex flex-col items-center">
-                <h2 class="text-xl font-semibold mb-6">Outils électroniques à découvrir</h2>
-                <div class="flex flex-col md:flex-row gap-8 w-full justify-center items-center">
-                    <!-- Outil 1 : Multimètre numérique -->
-                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-5a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <h3 class="font-bold text-lg mb-2">Multimètre numérique</h3>
-                        <p class="text-sm">Mesurez la tension, le courant et la résistance de vos circuits en toute simplicité.</p>
+        </section>
+
+        <!-- Section Boutique -->
+        <section id="boutique" class="container mx-auto px-4 mb-16">
+            <h2 class="text-3xl font-bold text-white text-center mb-10">Nos Produits Électroniques</h2>
+            
+            <!-- Catégories -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="category-btn bg-blue-600 text-white px-4 py-2 rounded-lg transition hover:bg-blue-700 active">Tous</button>
+                <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-lg transition hover:bg-gray-700">Smartphones</button>
+                <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-lg transition hover:bg-gray-700">Ordinateurs</button>
+                <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-lg transition hover:bg-gray-700">Accessoires</button>
+                <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-lg transition hover:bg-gray-700">Outils</button>
+            </div>
+            
+            <!-- Produits -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Produit 1 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-6xl text-white"></i>
                     </div>
-                    <!-- Outil 2 : Fer à souder -->
-                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6 6M7.5 10.5l6 6m-6-6l6 6m-6-6L6 12.5m.5-2.5l-2-2m0 0a2.828 2.828 0 014 4l-2-2z" />
-                        </svg>
-                        <h3 class="font-bold text-lg mb-2">Fer à souder</h3>
-                        <p class="text-sm">Assemblez ou réparez vos composants électroniques avec précision et sécurité.</p>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Smartphone Pro X</h3>
+                        <p class="text-gray-400 text-sm mb-4">Écran 6.7", 128GB, Appareil photo triple 48MP</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">699€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="1" data-name="Smartphone Pro X" data-price="699">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
                     </div>
-                    <!-- Outil 3 : Oscilloscope portable -->
-                    <div class="flex flex-col items-center text-center flex-1 min-w-[200px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4V9a4 4 0 00-4-4H7a4 4 0 00-4 4v6z" />
-                        </svg>
-                        <h3 class="font-bold text-lg mb-2">Oscilloscope portable</h3>
-                        <p class="text-sm">Visualisez les signaux électriques et analysez vos montages en temps réel.</p>
+                </div>
+                
+                <!-- Produit 2 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-laptop text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Laptop Ultra</h3>
+                        <p class="text-gray-400 text-sm mb-4">Intel i7, 16GB RAM, SSD 512GB, Écran 15.6"</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">1199€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="2" data-name="Laptop Ultra" data-price="1199">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 3 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-yellow-500 to-red-600 flex items-center justify-center">
+                        <i class="fas fa-headphones text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Casque Audio Pro</h3>
+                        <p class="text-gray-400 text-sm mb-4">Réduction de bruit, autonomie 30h, Bluetooth 5.2</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">249€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="3" data-name="Casque Audio Pro" data-price="249">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 4 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-tablet-alt text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Tablette Pro</h3>
+                        <p class="text-gray-400 text-sm mb-4">Écran 10.9", 256GB, Stylo inclus, 12h autonomie</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">899€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="4" data-name="Tablette Pro" data-price="899">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 5 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-indigo-500 to-blue-400 flex items-center justify-center">
+                        <i class="fas fa-tachometer-alt text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Multimètre numérique</h3>
+                        <p class="text-gray-400 text-sm mb-4">Mesure tension, courant, résistance. Précision élevée.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">89€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="5" data-name="Multimètre numérique" data-price="89">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 6 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center">
+                        <i class="fas fa-fire text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Fer à souder</h3>
+                        <p class="text-gray-400 text-sm mb-4">Température réglable, précision, sécurité optimale.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">45€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="6" data-name="Fer à souder" data-price="45">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 7 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-teal-500 to-green-500 flex items-center justify-center">
+                        <i class="fas fa-wave-square text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Oscilloscope portable</h3>
+                        <p class="text-gray-400 text-sm mb-4">Visualisation signaux électriques, analyse temps réel.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">299€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="7" data-name="Oscilloscope portable" data-price="299">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produit 8 -->
+                <div class="product-card bg-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800">
+                    <div class="h-48 bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
+                        <i class="fas fa-battery-full text-6xl text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-white mb-2">Power Bank 20000mAh</h3>
+                        <p class="text-gray-400 text-sm mb-4">Charge rapide, double port USB, design compact.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">39€</span>
+                            <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-id="8" data-name="Power Bank 20000mAh" data-price="39">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer toujours en bas -->
-        <footer class="w-full bg-black/60 text-white text-center py-4 mt-auto">
-            © 2025 Daniel_Tech
+        <!-- Section Outils électroniques -->
+        <section class="w-full flex flex-col items-center mb-16 px-4">
+            <div class="bg-black/80 backdrop-blur-sm rounded-xl px-6 py-8 text-white max-w-6xl shadow-xl border border-gray-800 w-full">
+                <h2 class="text-2xl font-bold mb-8 text-center">Outils électroniques à découvrir</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Outil 1 : Multimètre numérique -->
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-900/50 rounded-lg">
+                        <i class="fas fa-tachometer-alt text-4xl mb-4 text-yellow-400"></i>
+                        <h3 class="font-bold text-lg mb-2">Multimètre numérique</h3>
+                        <p class="text-gray-300">Mesurez la tension, le courant et la résistance de vos circuits en toute simplicité.</p>
+                    </div>
+                    <!-- Outil 2 : Fer à souder -->
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-900/50 rounded-lg">
+                        <i class="fas fa-fire text-4xl mb-4 text-red-400"></i>
+                        <h3 class="font-bold text-lg mb-2">Fer à souder</h3>
+                        <p class="text-gray-300">Assemblez ou réparez vos composants électroniques avec précision et sécurité.</p>
+                    </div>
+                    <!-- Outil 3 : Oscilloscope portable -->
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-900/50 rounded-lg">
+                        <i class="fas fa-wave-square text-4xl mb-4 text-green-400"></i>
+                        <h3 class="font-bold text-lg mb-2">Oscilloscope portable</h3>
+                        <p class="text-gray-300">Visualisez les signaux électriques et analysez vos montages en temps réel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full bg-black/80 backdrop-blur-sm text-white text-center py-6 mt-auto border-t border-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold">DANIEL_Tech</h3>
+                        <p class="text-gray-400">Votre partenaire technologique de confiance</p>
+                    </div>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-gray-800 text-gray-400">
+                    <p>© 2025 Daniel_Tech. Tous droits réservés.</p>
+                </div>
+            </div>
         </footer>
     </div>
+
+    <!-- Panier latéral -->
+    <div id="cart-sidebar" class="cart-sidebar fixed top-0 right-0 h-full w-full md:w-96 bg-gray-900 shadow-xl z-50 transform translate-x-full overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-white">Votre Panier</h2>
+                <button id="close-cart" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-6">
+                <!-- Les articles du panier seront ajoutés ici dynamiquement -->
+                <p id="empty-cart-message" class="text-gray-400 text-center py-4">Votre panier est vide</p>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-400">Sous-total:</span>
+                    <span id="cart-subtotal" class="text-white font-bold">0€</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-400">Livraison:</span>
+                    <span id="cart-shipping" class="text-white font-bold">Gratuite</span>
+                </div>
+                <div class="flex justify-between mb-6 text-lg">
+                    <span class="text-white font-bold">Total:</span>
+                    <span id="cart-total" class="text-white font-bold">0€</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Procéder au paiement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay pour le panier -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/70 z-40 hidden"></div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container fixed bottom-6 right-6 z-30">
+        <div id="chatbot" class="bg-gray-900 rounded-xl shadow-xl w-80 h-96 flex flex-col hidden border border-gray-700">
+            <div class="bg-blue-600 text-white p-4 rounded-t-xl flex justify-between items-center">
+                <h3 class="font-bold">Assistant DANIEL_Tech</h3>
+                <button id="close-chat" class="text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto">
+                <div class="chat-message bg-gray-800 rounded-lg p-3 mb-3">
+                    <p class="text-white text-sm">Bonjour ! Je suis l'assistant DANIEL_Tech. Comment puis-je vous aider aujourd'hui ?</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-700">
+                <div class="flex">
+                    <input id="chat-input" type="text" placeholder="Tapez votre message..." class="flex-1 bg-gray-800 text-white rounded-l-lg px-4 py-2 focus:outline-none">
+                    <button id="send-message" class="bg-blue-600 text-white px-4 rounded-r-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="chat-toggle" class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-blue-700 transition mt-4">
+            <i class="fas fa-comments text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        // Gestion du panier
+        let cart = [];
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartToggle = document.getElementById('cart-toggle');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        
+        // Gestion du chatbot
+        const chatbot = document.getElementById('chatbot');
+        const chatToggle = document.getElementById('chat-toggle');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        
+        // Ouvrir/fermer le panier
+        cartToggle.addEventListener('click', () => {
+            cartSidebar.classList.remove('translate-x-full');
+            cartOverlay.classList.remove('hidden');
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.add('hidden');
+        });
+        
+        cartOverlay.addEventListener('click', () => {
+            cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.add('hidden');
+        });
+        
+        // Ouvrir/fermer le chatbot
+        chatToggle.addEventListener('click', () => {
+            chatbot.classList.toggle('hidden');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatbot.classList.add('hidden');
+        });
+        
+        // Ajouter un produit au panier
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                
+                // Vérifier si le produit est déjà dans le panier
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Animation de confirmation
+                button.innerHTML = '<i class="fas fa-check"></i> Ajouté';
+                button.classList.remove('bg-blue-600');
+                button.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-cart-plus"></i> Ajouter';
+                    button.classList.remove('bg-green-600');
+                    button.classList.add('bg-blue-600');
+                }, 1500);
+            });
+        });
+        
+        // Mettre à jour le panier
+        function updateCart() {
+            // Mettre à jour le compteur
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Mettre à jour l'affichage des articles
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                checkoutBtn.disabled = true;
+            } else {
+                emptyCartMessage.classList.add('hidden');
+                checkoutBtn.disabled = false;
+                
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex justify-between items-center mb-4 p-3 bg-gray-800 rounded-lg';
+                    cartItem.innerHTML = `
+                        <div>
+                            <h4 class="font-bold text-white">${item.name}</h4>
+                            <p class="text-gray-400">${item.price}€ × ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="decrease-quantity text-gray-400 hover:text-white" data-id="${item.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="text-white mx-2">${item.quantity}</span>
+                            <button class="increase-quantity text-gray-400 hover:text-white" data-id="${item.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove-item text-red-400 hover:text-red-300 ml-2" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                
+                // Ajouter les écouteurs d'événements pour les boutons de quantité
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item) {
+                            item.quantity += 1;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item && item.quantity > 1) {
+                            item.quantity -= 1;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        cart = cart.filter(item => item.id !== id);
+                        updateCart();
+                    });
+                });
+            }
+            
+            // Mettre à jour les totaux
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            cartSubtotal.textContent = `${subtotal.toFixed(2)}€`;
+            cartTotal.textContent = `${subtotal.toFixed(2)}€`;
+        }
+        
+        // Gestion du chatbot
+        sendMessage.addEventListener('click', sendChatMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+        
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Ajouter le message de l'utilisateur
+                addMessageToChat(message, 'user');
+                chatInput.value = '';
+                
+                // Réponse automatique du chatbot
+                setTimeout(() => {
+                    let response = "Je suis désolé, je ne peux pas répondre à cette question pour le moment. Veuillez contacter notre service client pour une assistance personnalisée.";
+                    
+                    if (message.toLowerCase().includes('bonjour') || message.toLowerCase().includes('salut')) {
+                        response = "Bonjour ! Comment puis-je vous aider aujourd'hui ?";
+                    } else if (message.toLowerCase().includes('prix') || message.toLowerCase().includes('coût')) {
+                        response = "Les prix de nos produits sont indiqués sur chaque fiche produit. N'hésitez pas à consulter notre boutique en ligne !";
+                    } else if (message.toLowerCase().includes('livraison') || message.toLowerCase().includes('expédition')) {
+                        response = "Nous proposons la livraison gratuite pour toutes les commandes supérieures à 50€. Les délais de livraison sont de 2 à 5 jours ouvrés.";
+                    } else if (message.toLowerCase().includes('garantie') || message.toLowerCase().includes('retour')) {
+                        response = "Tous nos produits bénéficient d'une garantie de 2 ans. Nous acceptons les retours sous 30 jours après réception.";
+                    } else if (message.toLowerCase().includes('contact') || message.toLowerCase().includes('appeler')) {
+                        response = "Vous pouvez nous contacter au 01 23 45 67 89 du lundi au vendredi de 9h à 18h, ou par email à contact@danieltech.com.";
+                    }
+                    
+                    addMessageToChat(response, 'bot');
+                }, 1000);
+            }
+        }
+        
+        function addMessageToChat(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message mb-3 ${sender === 'user' ? 'ml-8 bg-blue-600' : 'mr-8 bg-gray-800'} rounded-lg p-3`;
+            messageDiv.innerHTML = `<p class="text-white text-sm">${message}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Gestion des catégories
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active', 'bg-blue-600');
+                    btn.classList.add('bg-gray-800');
+                });
+                
+                button.classList.add('active', 'bg-blue-600');
+                button.classList.remove('bg-gray-800');
+                
+                // Ici, vous pourriez filtrer les produits par catégorie
+                // Pour l'instant, nous n'implémentons pas cette fonctionnalité
+            });
+        });
+        
+        // Bouton de paiement
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                alert('Fonctionnalité de paiement à implémenter. Total: ' + cartTotal.textContent);
+                // Ici, vous redirigeriez vers une page de paiement ou intégreriez une solution de paiement
+            }
+        });
+    </script>
 </body>
 </html>
-
